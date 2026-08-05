@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="card">
+    <div class="search">
+        <!-- Đã bỏ value="London" để ô trống -->
+        <input type="text" placeholder="Nhập tên thành phố..." spellcheck="false">
+        <button><img src="images/search.png" alt="Search"></button>
+    </div>
+    
+    <div class="error" style="display: none;">
+        <p>Không tìm thấy tên thành phố này!</p>
+    </div>
+
+    <!-- Mặc định ẩn phần thời tiết khi chưa tìm kiếm -->
+    <div class="weather" style="display: none;">
+        <img src="images/rain.png" class="weather-icon" alt="Weather Icon">
+        <h1 class="temp">--°C</h1>
+        <h2 class="city">---</h2>
+        <div class="details">
+            <div class="col">
+                <img src="images/humidity.png" alt="Humidity">
+                <div>
+                    <p class="humidity">--%</p>
+                    <p>Độ ẩm</p>
+                </div>
+            </div>
+            <div class="col">
+                <img src="images/wind.png" alt="Wind">
+                <div>
+                    <p class="wind">-- km/h</p>
+                    <p>Tốc độ gió</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const apiKey = "ec61165a146dafe12a7282c76e24af09"; 
+    const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+    const searchBox = document.querySelector(".search input");
+    const searchBtn = document.querySelector(".search button");
+    const weatherIcon = document.querySelector(".weather-icon");
+    const errorDiv = document.querySelector(".error");
+    const weatherDiv = document.querySelector(".weather");
+
+    async function checkWeather(city) {
+        // Nếu ô tìm kiếm trống thì không làm gì cả
+        if (!city.trim()) return;
+
+        try {
+            const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+            
+            // Nếu API trả về mã lỗi 404 (Không tìm thấy thành phố)
+            if (response.status == 404 || !response.ok) {
+                errorDiv.style.display = "block";
+                weatherDiv.style.display = "none";
+            } else {
+                var data = await response.json();
+
+                document.querySelector(".city").innerHTML = data.name;
+                document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+                document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+                document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+                // Đổi icon tương ứng với thời tiết
+                const weatherCondition = data.weather[0].main;
+                if (weatherCondition == "Clouds") {
+                    weatherIcon.src = "images/clouds.png";
+                } else if (weatherCondition == "Clear") {
+                    weatherIcon.src = "images/clear.png";
+                } else if (weatherCondition == "Rain") {
+                    weatherIcon.src = "images/rain.png";
+                } else if (weatherCondition == "Drizzle") {
+                    weatherIcon.src = "images/drizzle.png";
+                } else if (weatherCondition == "Mist" || weatherCondition == "Fog") {
+                    weatherIcon.src = "images/mist.png";
+                } else if (weatherCondition == "Snow") {
+                    weatherIcon.src = "images/snow.png";
+                }
+
+                weatherDiv.style.display = "block";
+                errorDiv.style.display = "none";
+            }
+        } catch (error) {
+            // Trường hợp lỗi kết nối mạng hoặc lỗi khác
+            errorDiv.style.display = "block";
+            weatherDiv.style.display = "none";
+        }
+    }
+
+    // Bấm nút kính lúp để tìm kiếm
+    searchBtn.addEventListener("click", () => {
+        checkWeather(searchBox.value);
+    });
+
+    // Bấm phím Enter trên bàn phím để tìm kiếm
+    searchBox.addEventListener("keypress", (event) => {
+        if (event.key === "Enter") {
+            checkWeather(searchBox.value);
+        }
+    });
+</script>
+
+</body>
+</html>
