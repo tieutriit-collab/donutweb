@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Donut - Thưởng thức vị ngọt tan chảy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            dark: '#4a2c2a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+        }
+        .hero-blob {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite alternate;
+        }
+        @keyframes morph {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+            100% { border-radius: 60% 40% 30% 70% / 50% 60% 40% 60%; }
+        }
+    </style>
+</head>
+<body class="font-sans bg-amber-50/30 text-stone-800 antialiased flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-rose-100 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center text-white text-2xl shadow-md group-hover:scale-105 transition-transform">
+                    🍩
+                </div>
+                <span class="text-2xl font-bold text-brand-600 tracking-tight">Sweet Donut</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-stone-600">
+                <a href="#trang-chu" class="hover:text-brand-500 transition-colors">Trang chủ</a>
+                <a href="#thuc-don" class="hover:text-brand-500 transition-colors">Thực đơn bánh</a>
+                <a href="#ve-chung-toi" class="hover:text-brand-500 transition-colors">Về chúng tôi</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" class="relative p-2.5 rounded-full bg-rose-50 text-brand-600 hover:bg-rose-100 transition-colors">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">0</span>
+                </button>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-stone-600 hover:text-brand-500 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-rose-100 px-4 pt-2 pb-4 space-y-2">
+            <a href="#trang-chu" class="block py-2 text-stone-600 font-semibold hover:text-brand-500">Trang chủ</a>
+            <a href="#thuc-don" class="block py-2 text-stone-600 font-semibold hover:text-brand-500">Thực đơn bánh</a>
+            <a href="#ve-chung-toi" class="block py-2 text-stone-600 font-semibold hover:text-brand-500">Về chúng tôi</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section id="trang-chu" class="relative overflow-hidden py-12 md:py-20 lg:py-28 bg-gradient-to-b from-rose-50/50 to-transparent">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Hero Content -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-100 text-brand-600 text-sm font-bold shadow-sm animate-bounce">
+                            <span>🍩</span> Mới ra lò mỗi ngày
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-800 leading-tight">
+                            Thưởng thức vị ngọt <span class="text-brand-500">tan chảy</span> trong từng chiếc bánh!
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-stone-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            Những chiếc bánh donut mềm xốp, phủ lớp sốt socola, dâu tây và topping đầy màu sắc đang chờ đón bạn.
+                        </p>
+
+                        <div class="pt-2 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                            <a href="#thuc-don" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-brand-500 text-white font-bold text-lg shadow-lg shadow-rose-200 hover:bg-brand-600 hover:shadow-xl transition-all hover:-translate-y-0.5">
+                                Xem thực đơn ngay
+                                <i class="fa-solid fa-arrow-right ml-2 text-base"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Hero Graphic/Illustration -->
+                    <div class="lg:col-span-5 flex justify-center relative">
+                        <!-- Pink background circle shape -->
+                        <div class="w-72 h-72 sm:w-96 sm:h-96 bg-rose-200/60 hero-blob absolute -z-10 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-lg"></div>
+                        
+                        <div class="w-64 h-64 sm:w-80 sm:h-80 bg-rose-100 rounded-full flex items-center justify-center border-4 border-white shadow-2xl relative p-6">
+                            <!-- High quality Donut SVG representation -->
+                            <svg class="w-full h-full drop-shadow-xl transition-transform duration-500 hover:scale-105" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Dough -->
+                                <circle cx="100" cy="100" r="80" fill="#E89B53"/>
+                                <circle cx="100" cy="100" r="75" fill="#F4B266"/>
+                                <!-- Hole -->
+                                <circle cx="100" cy="100" r="28" fill="#FFEFEF"/>
+                                <!-- Icing Pink -->
+                                <path d="M100 25C125 25 155 35 168 60C178 80 170 100 173 120C176 138 160 160 140 170C120 178 95 170 80 173C60 177 40 160 30 140C20 120 28 95 25 75C22 50 50 25 100 25Z" fill="#FB7185"/>
+                                <!-- Icing Shine -->
+                                <path d="M60 45C80 35 110 35 130 42C120 48 90 48 65 55C60 52 58 48 60 45Z" fill="#FFB3C1" opacity="0.6"/>
+                                <!-- Donut Hole in Icing -->
+                                <circle cx="100" cy="100" r="28" fill="#FFEFEF"/>
+                                <!-- Sprinkles -->
+                                <rect x="70" y="55" width="12" height="4" rx="2" transform="rotate(25 70 55)" fill="#FFFFFF"/>
+                                <rect x="130" y="65" width="12" height="4" rx="2" transform="rotate(-35 130 65)" fill="#FACC15"/>
+                                <rect x="150" y="105" width="12" height="4" rx="2" transform="rotate(45 150 105)" fill="#38BDF8"/>
+                                <rect x="125" y="145" width="12" height="4" rx="2" transform="rotate(-15 125 145)" fill="#4ADE80"/>
+                                <rect x="65" y="135" width="12" height="4" rx="2" transform="rotate(60 65 135)" fill="#FFFFFF"/>
+                                <rect x="45" y="95" width="12" height="4" rx="2" transform="rotate(-20 45 95)" fill="#FACC15"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="thuc-don" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Title -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-800 tracking-tight">Thực Đơn Bánh Donut</h2>
+                    <p class="mt-3 text-lg text-stone-500">Lựa chọn những hương vị yêu thích của bạn bên dưới</p>
+                    <div class="w-16 h-1 bg-brand-500 mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <!-- Product Grid -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cards will be dynamically inserted or rendered -->
+                </div>
+            </div>
+        </section>
+
+        <section id="ve-chung-toi" class="py-16 bg-rose-50/40 border-t border-rose-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="text-brand-600 font-bold tracking-wider uppercase text-sm">Về Sweet Donut</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-stone-800">Mang niềm vui ngọt ngào đến mọi nhà</h2>
+                        <p class="text-stone-600 leading-relaxed">
+                            Tại Sweet Donut, mỗi chiếc bánh không chỉ là món ăn ngọt ngào mà còn là một tác phẩm nghệ thuật. Chúng tôi tỉ mỉ lựa chọn nguồn nguyên liệu cao cấp nhập khẩu, kết hợp với công thức bột bánh độc quyền tạo nên độ mềm mịn chuẩn vị.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 pt-4">
+                            <div class="p-4 bg-white rounded-2xl shadow-sm border border-rose-100">
+                                <h3 class="text-2xl font-bold text-brand-500 mb-1">100%</h3>
+                                <p class="text-sm text-stone-500">Nguyên liệu tươi sạch</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-2xl shadow-sm border border-rose-100">
+                                <h3 class="text-2xl font-bold text-brand-500 mb-1">20+</h3>
+                                <p class="text-sm text-stone-500">Hương vị độc đáo</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="aspect-video sm:aspect-square bg-gradient-to-tr from-rose-200 to-amber-100 rounded-3xl p-8 flex items-center justify-center text-center shadow-lg">
+                            <div class="space-y-4">
+                                <div class="text-6xl">🍩☕</div>
+                                <h3 class="text-2xl font-bold text-stone-800">Nướng mới mỗi sáng</h3>
+                                <p class="text-stone-600 max-w-xs mx-auto">Đảm bảo bánh luôn xốp mềm và lưu giữ hương vị tuyệt vời nhất khi đến tay bạn.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Sidebar / Drawer -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+        <div class="absolute inset-0 bg-stone-900/40 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+
+        <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <div class="p-6 bg-rose-50 border-b border-rose-100 flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-stone-800 flex items-center gap-2">
+                        <span>🛒</span> Giỏ hàng của bạn
+                    </h2>
+                    <button onclick="toggleCart()" class="text-stone-400 hover:text-stone-600 text-2xl p-1">
+                        &times;
+                    </button>
+                </div>
+
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Dynamic Cart Content -->
+                </div>
+
+                <div class="p-6 border-t border-stone-100 bg-stone-50 space-y-4">
+                    <div class="flex justify-between text-lg font-bold text-stone-800">
+                        <span>Tổng tiền:</span>
+                        <span id="cart-total" class="text-brand-600">0đ</span>
+                    </div>
+                    <button onclick="checkout()" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-md transition-all">
+                        Thanh Toán Đặt Hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-stone-800 text-white px-5 py-3 rounded-2xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-3">
+        <span class="text-xl">✅</span>
+        <span id="toast-message">Đã thêm vào giỏ hàng!</span>
+    </div>
+
+    <footer class="bg-stone-900 text-stone-300 py-12 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-2xl">🍩</span>
+                        <span class="text-xl font-bold text-white">Sweet Donut</span>
+                    </div>
+                    <p class="text-sm text-stone-400">Tiệm bánh donut thủ công chuẩn vị, ngọt ngào trong từng khoảnh khắc.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Liên hệ</h4>
+                    <p class="text-sm text-stone-400 mb-2"><i class="fa-solid fa-location-dot mr-2"></i> 123 Đường Bánh Ngọt, Quận 1, TP.HCM</p>
+                    <p class="text-sm text-stone-400 mb-2"><i class="fa-solid fa-phone mr-2"></i> 0909 123 456</p>
+                    <p class="text-sm text-stone-400"><i class="fa-solid fa-envelope mr-2"></i> hello@sweetdonut.vn</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Giờ mở cửa</h4>
+                    <p class="text-sm text-stone-400">Thứ 2 - Chủ Nhật: 07:00 - 21:30</p>
+                    <p class="text-sm text-brand-400 font-medium mt-2">✨ Bánh mới ra lò lúc 8:00 & 14:00 hàng ngày</p>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-stone-800 text-center text-sm text-stone-500">
+                &copy; 2026 Sweet Donut. All rights reserved. Designed with ❤️
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product Catalog Data
+        const products = [
+            {
+                id: 1,
+                title: "Donut Socola Cổ Điển",
+                desc: "Lớp vỏ bánh mềm mại phủ sốt socola đậm đà cùng vụn bánh quy.",
+                price: 25000,
+                iconBg: "bg-amber-100",
+                icon: "🍫",
+                svgColor: "#5C3D2E"
+            },
+            {
+                id: 2,
+                title: "Donut Dâu Tây Ngọt Ngào",
+                desc: "Sốt dâu tây tươi nguyên chất màu hồng bắt mắt, vị chua ngọt hài hòa.",
+                price: 28000,
+                iconBg: "bg-rose-100",
+                icon: "🍓",
+                svgColor: "#FB7185"
+            },
+            {
+                id: 3,
+                title: "Donut Matcha Nhật Bản",
+                desc: "Hương vị trà xanh thơm mát chuẩn Nhật, thanh ngọt không gắt.",
+                price: 30000,
+                iconBg: "bg-emerald-100",
+                icon: "🍵",
+                svgColor: "#4ADE80"
+            },
+            {
+                id: 4,
+                title: "Donut Bơ Đậu Phộng",
+                desc: "Bơ đậu phộng béo ngậy kết hợp hạt dẻ cười giòn tan rắc bên trên.",
+                price: 28000,
+                iconBg: "bg-orange-100",
+                icon: "🥜",
+                svgColor: "#F97316"
+            },
+            {
+                id: 5,
+                title: "Donut Việt Quất Tươi",
+                desc: "Sốt việt quất chua nhẹ cùng màu tím mộng mơ cuốn hút.",
+                price: 32000,
+                iconBg: "bg-indigo-100",
+                icon: "🫐",
+                svgColor: "#818CF8"
+            },
+            {
+                id: 6,
+                title: "Donut Kem Kem Vani",
+                desc: "Lớp phủ vani thơm lừng rắc cốm màu lung linh bắt mắt.",
+                price: 25000,
+                iconBg: "bg-yellow-100",
+                icon: "✨",
+                svgColor: "#FBBF24"
+            }
+        ];
+
+        let cart = [];
+
+        // Render Products
+        function renderProducts() {
+            const container = document.getElementById('product-grid');
+            container.innerHTML = products.map(p => `
+                <div class="bg-white rounded-3xl p-6 shadow-md shadow-rose-100/50 hover:shadow-xl hover:-translate-y-1 transition-all border border-rose-100 flex flex-col justify-between group">
+                    <div>
+                        <!-- Product Donut Visual / Icon Container -->
+                        <div class="${p.iconBg} h-48 rounded-2xl flex items-center justify-center relative overflow-hidden mb-6 group-hover:scale-[1.02] transition-transform">
+                            <div class="text-6xl absolute top-3 right-3 opacity-30">${p.icon}</div>
+                            
+                            <!-- Custom Donut Illustration per card -->
+                            <svg class="w-32 h-32 drop-shadow-md" viewBox="0 0 200 200" fill="none">
+                                <circle cx="100" cy="100" r="70" fill="#E89B53"/>
+                                <circle cx="100" cy="100" r="24" fill="#FFFFFF"/>
+                                <path d="M100 35C120 35 145 43 155 63C163 79 157 95 159 111C161 125 148 142 132 150C116 156 96 150 84 152C68 155 52 142 44 126C36 110 42 90 40 74C38 54 60 35 100 35Z" fill="${p.svgColor}"/>
+                                <circle cx="100" cy="100" r="24" fill="#FFFFFF"/>
+                                <circle cx="75" cy="65" r="3" fill="#FFFFFF"/>
+                                <circle cx="125" cy="75" r="3" fill="#FFFFFF"/>
+                                <circle cx="135" cy="120" r="3" fill="#FFFFFF"/>
+                                <circle cx="75" cy="125" r="3" fill="#FFFFFF"/>
+                            </svg>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-stone-800 mb-2">${p.title}</h3>
+                        <p class="text-stone-500 text-sm leading-relaxed mb-4">${p.desc}</p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-stone-100 mt-2">
+                        <span class="text-xl font-extrabold text-brand-600">${p.price.toLocaleString('vi-VN')}đ</span>
+                        <button onclick="addToCart(${p.id})" class="px-5 py-2.5 rounded-full bg-rose-50 text-brand-600 font-bold hover:bg-brand-500 hover:text-white transition-colors flex items-center gap-2 text-sm">
+                            <i class="fa-solid fa-plus"></i>
+                            Đặt hàng
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Cart Actions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Đã thêm "${product.title}" vào giỏ!`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function changeQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        function updateCartUI() {
+            // Count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = totalItems;
+
+            // List
+            const cartItemsContainer = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12 text-stone-400">
+                        <div class="text-5xl mb-3">🍩</div>
+                        <p>Giỏ hàng của bạn đang trống</p>
+                    </div>
+                `;
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex items-center gap-4 bg-stone-50 p-3 rounded-2xl border border-stone-100">
+                        <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-2xl shadow-sm">
+                            ${item.icon}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-stone-800 text-sm truncate">${item.title}</h4>
+                            <p class="text-xs text-brand-600 font-semibold">${item.price.toLocaleString('vi-VN')}đ</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="changeQuantity(${item.id}, -1)" class="w-7 h-7 rounded-full bg-white text-stone-600 font-bold hover:bg-stone-200 border border-stone-200">-</button>
+                            <span class="text-sm font-bold w-4 text-center">${item.quantity}</span>
+                            <button onclick="changeQuantity(${item.id}, 1)" class="w-7 h-7 rounded-full bg-white text-stone-600 font-bold hover:bg-stone-200 border border-stone-200">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Total Price
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('cart-total').innerText = total.toLocaleString('vi-VN') + 'đ';
+        }
+
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast("Giỏ hàng trống! Hãy chọn món nhé.");
+                return;
+            }
+            alert("Cảm ơn bạn đã đặt hàng tại Sweet Donut! Đơn hàng của bạn đang được xử lý.");
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Initialize Page
+        window.onload = function() {
+            renderProducts();
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
